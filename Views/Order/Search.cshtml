@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/Layout_Modeltype.cshtml";
+}
+
+
+<div align="center" class="jumbotron-fluid text-info">
+    <h1 class="display-4 bg-info text-light">@ViewData["ModelType_VALUE"]</h1>
+    <div class="row">
+        @foreach (var tmp in ViewData["Order"] as Dictionary<string, Dictionary<string, string>>)
+        {
+            @foreach (var tmp_1 in ViewData["ModelList"] as List<string>)
+            {
+                if (tmp.Value["ModelName"] == tmp_1)
+                {
+                    <div class="col-sm-3" style="border: 1px solid #29a3a3;">
+                        <div>@tmp.Value["OrderName"]</div>
+                        <div>
+                            <img src="@tmp.Value["pic"]" alt="@tmp.Value["OrderName"]" width="60%" />
+                        </div>
+                        <div>
+                            <form class="form-group" action="/Home/GetOrder" method="post">
+                                <label>@tmp.Value["cost"] Baht</label>
+                                <button class="btn btn-info" name="OrderCode" value="@tmp.Key" type="submit">Buy</button>
+                            </form>
+                        </div>
+                        <div>
+                            <div>Spec1 : @tmp.Value["Spec1"]</div>
+                            <div>Spec2 : @tmp.Value["Spec2"]</div>
+                            <div>Spec3 : @tmp.Value["Spec3"]</div>
+                            <div>Spec4 : @tmp.Value["Spec4"]</div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
