@@ -1,0 +1,90 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Home.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/About">About <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Contact">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Payment">Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Tracking">Tracking</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/GetOrder">Order</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/Home/Search/">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="list-group-item-light">
+        @foreach (var tmp in ViewData["ModelList"] as List<string>)
+        {
+            @foreach (var tmp_1 in ViewData["ModelName"] as Dictionary<string, string>)
+            {
+                @if (tmp == tmp_1.Key)
+                {
+                    <a class="btn btn-outline-info" href="/Order/SearchModel/?ModelType=@(ViewData["ModelType"])&ModelName=@(tmp)">@tmp_1.Value</a>
+                }
+            }
+        }
+    </div>
+
+    @RenderBody()
+
+    <div class="row bg-secondary text-light">
+        <div class="col-md-4">
+            <h2>Home.com</h2>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <div>Phone number</div>
+                @foreach (var phonenumber_tmp in ViewData["Phonenumber_LIST"] as Dictionary<string, Dictionary<string, string>>)
+                {
+                    <div>@(phonenumber_tmp.Value["name"] + "\t0" + phonenumber_tmp.Key )</div>
+                }
+            </div>
+            <div>
+                <div>Stay Online</div>
+                @foreach (var social_tmp in ViewData["Social_LIST"] as Dictionary<string, Dictionary<string, string>>)
+                {
+                    <div class="d-inline"><a href="@social_tmp.Value["Link"]"><img src="@social_tmp.Value["Pic"]" alt="@social_tmp.Key" width="10%" /></a></div>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2>Header Link</h2>
+            <div class="d-inline"><a class="text-light" href="/Home/About">About</a></div>
+            <div class="d-inline"><a class="text-light" href="/Home/Contact">Contact</a></div>
+            <div class="d-inline"><a class="text-light" href="/Home/Payment">Payment</a></div>
+            <div class="d-inline"><a class="text-light" href="/Home/Tracking">Tracking</a></div>
+            <div class="d-inline"><a class="text-light" href="/Home/GetOrder">Order</a></div>
+        </div>
+    </div>
+    <script src="~/jquery/dist/jquery.slim.min.js"></script>
+    <script src="~/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
