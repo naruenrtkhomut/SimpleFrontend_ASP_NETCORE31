@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@foreach (var tmp in ViewData["ModelList"] as List<string>)
+{
+    <div>@tmp</div>
+}
+

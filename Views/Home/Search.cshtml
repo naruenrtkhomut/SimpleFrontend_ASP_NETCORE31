@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+    <div align="center" class="jumbotron-fluid text-danger">
+        <h1 class="display-4 bg-danger text-light">Order serach : @ViewData["OrderSearch"]</h1>
+        <div class="row">
+            @foreach (var list_tmp in ViewData["OrderLIST"] as List<string>)
+            {
+                @foreach (var ordercode_tmp in ViewData["Order"] as Dictionary<string, Dictionary<string, string>>)
+                {
+                    @if (ordercode_tmp.Key == list_tmp)
+                    {
+                        <div class="col-sm-3" style="border: 1px solid red;">
+                            <div>@ordercode_tmp.Value["OrderName"]</div>
+                            <div>
+                                <img src="@ordercode_tmp.Value["pic"]" alt="@ordercode_tmp.Value["OrderName"]" width="60%" />
+                            </div>
+                            <div>
+                                <form class="form-group" action="/Home/GetOrder" method="post">
+                                    <label>@ordercode_tmp.Value["cost"] Baht</label>
+                                    <button class="btn btn-info" name="OrderCode" value="@ordercode_tmp.Key" type="submit">Buy</button>
+                                </form>
+                            </div>
+                            <div>
+                                <div>Spec1 : @ordercode_tmp.Value["Spec1"]</div>
+                                <div>Spec2 : @ordercode_tmp.Value["Spec2"]</div>
+                                <div>Spec3 : @ordercode_tmp.Value["Spec3"]</div>
+                                <div>Spec4 : @ordercode_tmp.Value["Spec4"]</div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>

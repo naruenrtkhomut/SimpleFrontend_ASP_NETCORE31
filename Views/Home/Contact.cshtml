@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+    <div align="center" class="jumbotron-fluid text-info">
+        <h1 class="display-4">You can contact us here</h1>
+        <h1 class="display-4">Phone number</h1>
+        @foreach (var phonenumber_tmp in ViewData["Phonenumber_LIST"] as Dictionary<string, Dictionary<string, string>>)
+        {
+            <div>@(phonenumber_tmp.Value["name"] + "\tCALL :\t0" + phonenumber_tmp.Key)</div>
+        }
+        <h1 align="center" class="display-4">Connect with us here</h1>
+        @foreach (var social_tmp in ViewData["Social_LIST"] as Dictionary<string, Dictionary<string, string>>)
+        {
+            <div class="d-inline p4"><a href="@social_tmp.Value["Link"]"><img src="@social_tmp.Value["Pic"]" width="10%" /></a></div>
+        }
+    </div>

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewData["Title"] = "GetOrder";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div align="center" class="container-fluid text-info">
+    @foreach (var code_tmp in ViewData["Order_LIST"] as Dictionary<string, Dictionary<string, string>>)
+    {
+        @if(code_tmp.Key == ViewData["OrderCode"].ToString())
+        {
+            <div>@code_tmp.Value["OrderName"]</div>
+            <img src="@code_tmp.Value["pic"]"/>
+            <form method="post" action="/GetOrder/GET/">
+                <label>@(code_tmp.Value["cost"] + "\tBaht")</label>
+                <input type="hidden" value="@code_tmp.Key" name="GET_ORDER"/>
+                <button class="btn-outline-success" type="submit">GET</button>
+            </form>
+        }
+    }
+</div>

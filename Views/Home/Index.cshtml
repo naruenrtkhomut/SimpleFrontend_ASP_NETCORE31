@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<div align="center" class="jumbotron-fluid text-info">
+    <h1 class="display-4 bg-info text-light">Latest Order Update</h1>
+    <div class="row">
+        @foreach (var latestorder_tmp in ViewData["LatestOrder_LIST"] as Dictionary<string, Dictionary<string, string>>)
+        {
+            <div class="col-sm-3" style="border: 1px solid #29a3a3;">
+                <div>@latestorder_tmp.Value["OrderName"]</div>
+                <div>
+                    <img src="@latestorder_tmp.Value["pic"]" alt="@latestorder_tmp.Value["OrderName"]" width="60%" />
+                </div>
+                <div>
+                    <form class="form-group" action="/Home/GetOrder" method="post">
+                        <label>@latestorder_tmp.Value["cost"] Baht</label>
+                        <button class="btn btn-info" name="OrderCode" value="@latestorder_tmp.Key" type="submit">Buy</button>
+                    </form>
+                </div>
+                <div>
+                    <div>Spec1 : @latestorder_tmp.Value["Spec1"]</div>
+                    <div>Spec2 : @latestorder_tmp.Value["Spec2"]</div>
+                    <div>Spec3 : @latestorder_tmp.Value["Spec3"]</div>
+                    <div>Spec4 : @latestorder_tmp.Value["Spec4"]</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div align="center" class="jumbotron-fluid text-danger">
+    <h1 class="display-4 bg-danger text-light">ViewData["ModelType"]</h1>
+    <div class="row">
+        @foreach (var hotestorder_tmp in ViewData["HotestOrder_LIST"] as Dictionary<string, Dictionary<string, string>>)
+        {
+            <div class="col-sm-3" style="border: 1px solid red;">
+                <div>@hotestorder_tmp.Value["OrderName"]</div>
+                <div>
+                    <img src="@hotestorder_tmp.Value["pic"]" alt="@hotestorder_tmp.Value["OrderName"]" width="60%" />
+                </div>
+                <div>
+                    <form class="form-group" action="/Home/GetOrder" method="post">
+                        <label>@hotestorder_tmp.Value["cost"] Baht</label>
+                        <button class="btn btn-info" name="OrderCode" value="@hotestorder_tmp.Key" type="submit">Buy</button>
+                    </form>
+                </div>
+                <div>
+                    <div>Spec1 : @hotestorder_tmp.Value["Spec1"]</div>
+                    <div>Spec2 : @hotestorder_tmp.Value["Spec2"]</div>
+                    <div>Spec3 : @hotestorder_tmp.Value["Spec3"]</div>
+                    <div>Spec4 : @hotestorder_tmp.Value["Spec4"]</div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

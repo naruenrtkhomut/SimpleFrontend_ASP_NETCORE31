@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+    <div align="center" class="container text-info">
+        <h1>Payment list</h1>
+        @foreach (var payment_tmp in ViewData["Payment_LIST"] as Dictionary<string, Dictionary<string, string>>)
+        {
+            <div>
+                <div class="d-inline">@payment_tmp.Value["Name"]</div>
+                <div class="d-inline">@payment_tmp.Value["ACCNumber"]</div>
+                <div class="d-inline"><img src="@payment_tmp.Value["Pic"]" width="5%" /></div>
+            </div>
+        }
+    </div>
+
